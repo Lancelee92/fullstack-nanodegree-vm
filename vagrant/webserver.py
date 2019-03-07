@@ -63,11 +63,10 @@ class WebServerHandler(BaseHTTPRequestHandler):
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
                 output = "<html><head><meta charset='UTF-8'></head><body>"
-                output += "<h1>Confirm Delete %s Restaurant?</h1>" % restaurant.name
-                output += "<form method='post' enctype='multipart/form-data' action = '/restaurants/"+ str(restaurant.id) +"/delete'>"
+                output += "<h1>Confirm Delete "+ restaurant.name +" Restaurant?</h1>"
+                output += "<form method='post' enctype='multipart/form-data' action = '/restaurants/"+ str(restaurant.id) +"/edit'>"
                 output += "<input type='submit' value='Delete'>"
                 output += "</form>"
-                output += "<p>Current name: " + restaurant.name + "</p>"
                 output += "</body></html>"
                 self.wfile.write(output)            
                 return
@@ -81,8 +80,8 @@ class WebServerHandler(BaseHTTPRequestHandler):
                 self.end_headers()           
                 for restaurant in restaurants:
                     output += "<p>" + restaurant.name + "</p>"
-                    output += "<p><a href ='restaurants/"+ str(restaurant.id) +"/edit'>" + "Edit" + "</a></p>"
-                    output += "<p><a href='restaurants/"+ str(restaurant.id) +"/delete'>" + "Delete" + "</a></p>"
+                    output += "<p><a href ='/restaurants/"+ str(restaurant.id) +"/edit'>" + "Edit" + "</a></p>"
+                    output += "<p><a href='/restaurants/"+ str(restaurant.id) +"/delete'>" + "Delete" + "</a></p>"
                 output += "</body></html>"
                 self.wfile.write(output)
                 return
@@ -145,6 +144,7 @@ class WebServerHandler(BaseHTTPRequestHandler):
                 if ctype == 'multipart/form-data':
                     id = self.path.split("/")[2]
                     restaurant = session.query(Restaurant).filter(Restaurant.id == id).one()
+
                     session.delete(restaurant)
                     session.commit()                   
 
@@ -153,8 +153,6 @@ class WebServerHandler(BaseHTTPRequestHandler):
                     self.send_header('Location', '/restaurants')
                     self.end_headers()                   
                     return
-
-            
         except:
             pass
 
