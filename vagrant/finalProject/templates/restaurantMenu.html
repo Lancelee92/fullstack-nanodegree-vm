@@ -1,0 +1,19 @@
+<html>
+<head>
+</head>
+<body>
+<h1> {{restaurant.name}} Menu </h1>
+
+<div class = 'pane'>
+{% if menus %}
+
+{% for menu in menus %}
+    <p>{{menu.name}}</p>
+    <p>{{menu.description}}</p>
+    <p>{{menu.price}}</p>
+{% endfor %}
+
+{% endif %}
+</div>
+</body>
+</html>
