@@ -3,7 +3,9 @@
 </head>
 <body>
 <h1> {{restaurant.name}} Menu </h1>
-
+</br>
+<a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">New Menu</a>
+</br>
 <div class = 'pane'>
 {% if menus %}
 
@@ -11,9 +13,14 @@
     <p>{{menu.name}}</p>
     <p>{{menu.description}}</p>
     <p>{{menu.price}}</p>
+    <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, item_id = menu.id)}}">Edit</a>
+    <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, item_id = menu.id)}}">Delete</a>
+    </br>
 {% endfor %}
 
 {% endif %}
+<button type='button' onclick='location.href="{{url_for('restaurants')}}"'>Cancel</button>
+
 </div>
 </body>
 </html>

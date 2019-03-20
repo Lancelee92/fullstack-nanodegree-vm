@@ -1,8 +1,18 @@
 <html>
-<header>
-    <title></title>
-</header>
+<head>
+</head>
 <body>
-<h1></h1>
+<h1> Delete Menu Item </h1>
+
+<div class = 'pane'>
+<form action="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, item_id = item.id)}}" method = 'POST'>
+
+<p>Confirm Delete Menu {{item.name}}:</p>
+
+<input type='submit' value='Delete'>
+<button type='button' onclick='location.href="{{url_for('restaurants')}}"'>Cancel</button>
+
+</form>
+</div>
 </body>
 </html>

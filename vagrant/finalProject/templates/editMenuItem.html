@@ -1,8 +1,27 @@
 <html>
-<header>
-    <title></title>
-</header>
+<head>
+</head>
 <body>
-<h1></h1>
+<h1> Edit Restaurant </h1>
+
+<div class = 'pane'>
+<form action="{{url_for('editMenuItem', restaurant_id=menu.restaurant_id, item_id = menu.id)}}" method = 'POST'>
+
+<p>Name:</p>
+
+<input type='text' size='30' name='name' placeholder='{{menu.name}}'>
+
+<p>Description:</p>
+
+<input type='text' size='30' name='description' placeholder='{{menu.description}}'>
+
+<p>Price:</p>
+
+<input type='text' size='30' name='price' placeholder='{{menu.price}}'>
+
+<input type='submit' value='Edit Restaurant'>
+
+</form>
+</div>
 </body>
 </html>
