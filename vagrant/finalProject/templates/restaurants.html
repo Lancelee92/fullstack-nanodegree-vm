@@ -1,9 +1,14 @@
 <html>
 <header>
     <title></title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='semantic.min.css') }}">   
 </header>
 <body>
-<h1>Restaurants</h1>
+<div class = 'ui card centered grid'>
+<div class="content">
+    <div class="header">Restaurants</div>
+</div>
+
 <a href="{{url_for('newRestaurant')}}">Create New Restaurant</a>
 </br>
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -16,16 +21,35 @@
   {% endif %}
 {% endwith %}
 {% if restaurants %}
-
+<div class='content'>
     {% for restaurant in restaurants %}
-        <div>
-            <span>{{restaurant.name}}</span>
-            <a href="{{url_for('restaurantMenu', restaurant_id = restaurant.id)}}">Link</a>
-            <a href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
-            <a href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
-        </div>
-    {% endfor %}
-{% endif %}        
         
+            <h4 class="ui sub header">{{restaurant.name}}<a href="{{url_for('restaurantMenu', restaurant_id = restaurant.id)}}">[Link]</a></h4>
+            <!--<div class="event">
+                <div class="content">
+                    <div class="summary">
+                        <a href="{{url_for('restaurantMenu', restaurant_id = restaurant.id)}}">Link</a>
+                    </div>
+                </div>
+            </div>-->
+            <div class="event">
+                <div class="content">
+                    <div class="summary">
+                    <a href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="event">
+                <div class="content">
+                    <div class="summary">
+                        <a href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
+                    </div>
+                </div>
+            </div>            
+        
+    {% endfor %}
+</div>
+{% endif %}        
+</div>
 </body>
 </html>

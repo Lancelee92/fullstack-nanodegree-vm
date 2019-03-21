@@ -1,8 +1,12 @@
 <html>
 <head>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='semantic.min.css') }}">   
 </head>
 <body>
-<h1> {{restaurant.name}} Menu </h1>
+<div class = 'ui card centered grid'>
+<div class="content">
+    <div class="header"> {{restaurant.name}} Restaurants</div>
+</div>
 </br>
 <a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">New Menu</a>
 </br>
@@ -15,21 +19,46 @@
     </ul>
   {% endif %}
 {% endwith %}
-<div class = 'pane'>
+<div class = 'content'>
 {% if menus %}
 
 {% for menu in menus %}
-    <p>{{menu.name}}</p>
-    <p>{{menu.description}}</p>
-    <p>{{menu.price}}</p>
-    <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, item_id = menu.id)}}">Edit</a>
-    <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, item_id = menu.id)}}">Delete</a>
+    <h5 class='ui sub header'>{{menu.name}}</h5>
+    <div class="event">
+      <div class="content">
+        <div class="summary">
+          <p>{{menu.description}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="event">
+        <div class="content">
+          <div class="summary">
+             <p>{{menu.price}}</p>
+          </div>
+        </div>
+    </div>
+    <div class="event">
+        <div class="content">
+          <div class="summary">
+             <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, item_id = menu.id)}}">Edit</a>
+          </div>
+        </div>
+    </div>
+    <div class="event">
+        <div class="content">
+          <div class="summary">
+             <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, item_id = menu.id)}}">Delete</a>
+          </div>
+        </div>
+    </div>   
     </br>
 {% endfor %}
 
 {% endif %}
 <button type='button' onclick='location.href="{{url_for('restaurants')}}"'>Cancel</button>
 
+</div>
 </div>
 </body>
 </html>

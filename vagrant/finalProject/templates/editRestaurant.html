@@ -1,19 +1,25 @@
 <html>
 <head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='semantic.min.css') }}">   
+
 </head>
 <body>
-<h1> Edit Restaurant </h1>
+<div class = 'ui card centered grid'>
+<div class="content">
+    <div class="header">Edit Restaurants</div>
+</div>
 
-<div class = 'pane'>
-<form action="{{url_for('editRestaurant', restaurant_id=restaurant.id)}}" method = 'POST'>
-
-<p>Name:</p>
-
-<input type='text' size='30' name='name' placeholder='{{restaurant.name}}'>
-
-<input type='submit' value='Edit Restaurant'>
-
+<div class = 'content'>
+<form class="ui form" action="{{url_for('editRestaurant', restaurant_id=restaurant.id)}}" method = 'POST'>
+  <div class="field">
+    <label>Name</label>
+    <input type='text' size='30' name='name' placeholder='{{restaurant.name}}'>
+  </div>
+  <button class="ui button" type="submit">Edit Restaurant</button>
 </form>
+<a class="ui button" href='{{url_for('restaurants')}}'>Cancel</a>
+</div>
+</div>
 </div>
 </body>
 </html>
