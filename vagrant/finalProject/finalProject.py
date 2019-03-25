@@ -12,6 +12,13 @@ from database_setup import Restaurant, Base, MenuItem
 from flask import session as login_session
 import random, string
 
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
+import httplib2
+import json
+from flask import make_response
+import requests
+
 engine = create_engine('sqlite:///restaurantmenu.db', connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
 
@@ -29,7 +36,8 @@ def restaurants():
 def showLogin():
 	state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
 	login_session['state'] = state
-	return "The cuurent session state is %s" %login_session['state']
+	return render_template('login.html', STATE = state);
+	#return "The cuurent session state is %s" %login_session['state']
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
 def restaurantMenu(restaurant_id):
