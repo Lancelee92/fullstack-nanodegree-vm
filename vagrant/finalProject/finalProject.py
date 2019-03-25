@@ -8,6 +8,10 @@ from sqlalchemy.orm import sessionmaker
 
 from database_setup import Restaurant, Base, MenuItem
 
+#NEW IMPORTS FOR THIS STEP
+from flask import session as login_session
+import random, string
+
 engine = create_engine('sqlite:///restaurantmenu.db', connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
 
@@ -20,6 +24,12 @@ def restaurants():
     restaurants = session.query(Restaurant)
     return render_template('restaurants.html', restaurants=restaurants)
     #return "this is my homepage with list of restaurant!"
+
+@app.route('/login')
+def showLogin():
+	state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+	login_session['state'] = state
+	return "The cuurent session state is %s" %login_session['state']
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
 def restaurantMenu(restaurant_id):
