@@ -14,6 +14,7 @@ import random, string
 
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
+from oauth2client.client import Credentials
 import httplib2
 import json
 from flask import make_response
@@ -80,7 +81,7 @@ def gconnect():
         response.headers['Content-Type'] = 'application/json'
     
     #Store the access token in the session for later use
-    login_session['credentials'] = credentials
+    login_session['credentials'] = Credentials.from_json(credentials)
     login_session['gplus_id'] = gplus_id
 
     #Get user info
