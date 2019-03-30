@@ -4,9 +4,11 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='semantic.min.css') }}">   
 </header>
 <body>
+
 <div class = 'ui card centered grid'>
 <div class="content">
     <div class="header">Restaurants</div>
+    <a href='{{url_for('showLogin')}}' class="right floated mini ui">Login</a>
 </div>
 
 <a href="{{url_for('newRestaurant')}}">Create New Restaurant</a>
@@ -53,5 +55,6 @@
 </div>
 {% endif %}        
 </div>
+
 </body>
 </html>
